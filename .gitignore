@@ -1,0 +1,9 @@
+/target/
+*.profraw
+.DS_Store
+
+# Local operator configuration and environment overrides may name secret sources.
+/.env
+/.env.*
+/drift-cli.local.toml
+
