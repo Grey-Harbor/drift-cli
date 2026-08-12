@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://drift-cli.greyharborsoftware.com">
-    <img src="site/public/drift-cli-mark.svg" width="120" height="120" alt="Drift CLI" />
+    <img src="site/public/brand/social-card.png" width="865" alt="Drift CLI — Tenant-scoped administration and recovery for Drift" />
   </a>
 </p>
 <p align="center">
