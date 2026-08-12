@@ -1,8 +1,16 @@
+<p align="center">
+  <a href="https://drift-cli.greyharborsoftware.com">
+    <img src="site/public/drift-cli-mark.svg" width="120" height="120" alt="Drift CLI" />
+  </a>
+</p>
+
 # Drift CLI
 
 Drift CLI is a Rust command-line administration client for [Drift](https://github.com/Grey-Harbor/drift). It wraps Drift's existing HTTP contracts so self-hosters, operators, and automation can perform privileged workflows without hand-crafting JSON and `curl` commands.
 
 It is not a graph editor, application-data authoring interface, persistence engine, or shortcut around Drift authorization and tenant isolation.
+
+Read the [Drift CLI documentation](https://drift-cli.greyharborsoftware.com/docs/) or start with the [operator tutorial](https://drift-cli.greyharborsoftware.com/docs/tutorial/).
 
 ## Status
 
@@ -45,6 +53,7 @@ Use `--key-stdin` when an environment variable is inappropriate. The CLI never s
 
 ## Documentation
 
+- [Drift CLI website](https://drift-cli.greyharborsoftware.com)
 - [Kickoff findings and plan](PLAN.md)
 - [Drift API inventory](docs/reference/drift-api-inventory.md)
 - [Initial command surface](docs/reference/initial-command-surface.md)

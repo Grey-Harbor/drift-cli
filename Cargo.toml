@@ -6,6 +6,8 @@ rust-version = "1.85"
 publish = false
 description = "Tenant-scoped administration and recovery CLI for Drift"
 repository = "https://github.com/cuzz22000/drift-cli"
+homepage = "https://drift-cli.greyharborsoftware.com"
+documentation = "https://drift-cli.greyharborsoftware.com/docs/"
 license = "Apache-2.0"
 
 [[bin]]

@@ -107,13 +107,14 @@ Do not advertise a complete recovery list while Drift returns active and deleted
 - Version conflicts, active-record conflicts, inactive edge endpoints, and cross-tenant not-found behavior are tested.
 - No command claims an archive object exists.
 
-## Phase 5: documentation and distribution polish — documentation complete, distribution pending
+## Phase 5: documentation and distribution polish — website complete, distribution pending
 
 ### Documentation
 
 - Write `docs/tutorial/getting-started.md` using only released commands.
 - Write focused how-to guides for admin access, key creation, revocation, recovery, and JSON output.
 - Publish concise command, configuration, environment, output schema, and exit-code references.
+- Publish the Drift-aligned static website and Fumadocs documentation at `drift-cli.greyharborsoftware.com`.
 - Add a tenant guide only after Phase 2 is supported.
 - Cross-link canonical Drift contracts rather than copying them.
 

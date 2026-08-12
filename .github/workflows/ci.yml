@@ -1,0 +1,37 @@
+name: Verify
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - name: Install Rust 1.85 toolchain
+        run: rustup toolchain install 1.85.0 --profile minimal --component clippy,rustfmt
+      - run: cargo +1.85.0 fmt --check
+      - run: cargo +1.85.0 clippy --all-targets --all-features -- -D warnings
+      - run: cargo +1.85.0 test --all-targets
+
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+        working-directory: site
+      - run: npm run check
+        working-directory: site
+      - run: npm run build
+        working-directory: site

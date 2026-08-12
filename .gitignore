@@ -1,4 +1,8 @@
 /target/
+site/node_modules/
+site/.next/
+site/out/
+site/tsconfig.tsbuildinfo
 *.profraw
 .DS_Store
 
@@ -6,4 +10,3 @@
 /.env
 /.env.*
 /drift-cli.local.toml
-
