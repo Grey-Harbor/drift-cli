@@ -3,6 +3,9 @@
     <img src="site/public/drift-cli-mark.svg" width="120" height="120" alt="Drift CLI" />
   </a>
 </p>
+<p align="center">
+  <a href="https://drift-cli.greyharborsoftware.com">drift-cli.greyharborsoftware.com</a>
+</p>
 
 # Drift CLI
 
