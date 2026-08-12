@@ -57,18 +57,12 @@ Use `--key-stdin` when an environment variable is inappropriate. The CLI never s
 ## Documentation
 
 - [Drift CLI website](https://drift-cli.greyharborsoftware.com)
-- [Kickoff findings and plan](PLAN.md)
-- [Drift API inventory](docs/reference/drift-api-inventory.md)
-- [Initial command surface](docs/reference/initial-command-surface.md)
-- [Client architecture and dependencies](docs/explanation/architecture.md)
-- [Administration security model](docs/explanation/admin-security-model.md)
-- [Tenant administration trust boundary](docs/explanation/tenant-administration-boundary.md)
-- [Configuration and credential handling](docs/explanation/configuration-and-credentials.md)
-- [Command reference](docs/reference/commands.md)
-- [Configuration reference](docs/reference/configuration.md)
-- [Exit codes](docs/reference/exit-codes.md)
+- [Tutorials](docs/tutorial/README.md) for guided learning
+- [How-to guides](docs/how-to/README.md) for operator tasks
+- [Reference](docs/reference/README.md) for exact contracts
+- [Explanation](docs/explanation/README.md) for architecture and security context
 
-Start with the [operator tutorial](docs/tutorial/getting-started.md).
+Start with the [operator tutorial](docs/tutorial/getting-started.md). Contributors should use the [documentation style guide](docs/STYLE.md).
 
 ## License
 

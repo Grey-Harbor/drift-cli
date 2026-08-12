@@ -1,15 +1,12 @@
-# Drift CLI reference
+# Reference
 
-Use this reference for exact commands, inputs, outputs, environment variables, and Drift API coverage.
+Use reference documentation when you need an exact Drift CLI contract rather than a guided procedure or design rationale.
 
-## Command and configuration contracts
+- [Commands](commands.md) — syntax, required options, effects, and command limitations.
+- [Configuration](configuration.md) — TOML fields, defaults, validation, and precedence.
+- [Environment variables](environment.md) — supported variables and credential resolution.
+- [JSON output](json-output.md) — success and error envelopes, streams, and compatibility rules.
+- [Exit codes](exit-codes.md) — stable process outcomes for automation.
+- [Drift v1 administration API inventory](drift-api-inventory.md) — upstream routes, authorization, errors, and known API gaps.
 
-- [Commands](commands.md)
-- [Configuration](configuration.md)
-- [Environment variables](environment.md)
-- [Exit codes](exit-codes.md)
-
-## Scope and upstream API
-
-- [Initial command surface](initial-command-surface.md)
-- [Drift v1 administration API inventory](drift-api-inventory.md)
+For writing and reviewing documentation itself, use the [documentation style guide](../STYLE.md).

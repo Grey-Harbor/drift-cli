@@ -52,3 +52,13 @@ drift recovery restore <vertex|edge> <id> --version <positive-integer>
 Restoring a vertex does not restore its incident edges. An edge can be restored only after both endpoint vertices are active.
 
 There is no recovery-list command because Drift v1 cannot filter its paginated list to deleted records only.
+
+## Task guides
+
+Use the how-to guides for procedures and verification:
+
+- [Create a tenant key](../how-to/create-tenant-key.md)
+- [Revoke a tenant key](../how-to/revoke-key.md)
+- [Rotate a tenant key](../how-to/rotate-key.md)
+- [Restore a soft-deleted record](../how-to/restore-soft-deleted-record.md)
+- [Use JSON output in automation](../how-to/use-json-output.md)

@@ -30,7 +30,7 @@ These findings intentionally narrow the first implementation. Tenant commands re
 
 ### Decisions applied
 
-- The command spelling in `docs/reference/initial-command-surface.md` is implemented.
+- The command spelling explained in `docs/explanation/command-scope.md` is implemented and defined precisely in `docs/reference/commands.md`.
 - Configuration and credential precedence follow the documented design.
 - Status always checks health and discovers the OpenAPI title/version.
 - The project is licensed under Apache-2.0.

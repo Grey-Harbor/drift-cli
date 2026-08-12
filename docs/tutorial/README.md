@@ -1,9 +1,7 @@
-# Drift CLI tutorial
+# Tutorials
 
-Use this tutorial when you are ready to build Drift CLI and administer an existing Drift tenant for the first time.
+Use a tutorial when you are learning Drift CLI and want a complete path with a known starting state and outcome.
 
-## Start here
+- [Administer an existing Drift tenant](getting-started.md) — build the CLI, connect to Drift, inspect keys, and create a tenant-scoped read credential.
 
-- [Administer an existing Drift tenant](getting-started.md)
-
-The tutorial uses only commands backed by Drift's released HTTP API. Tenant bootstrap remains a server-local Drift operation.
+The tutorial begins after a Drift operator has completed server-local tenant bootstrap. Drift CLI does not create or select tenants.

@@ -1,54 +1,39 @@
-# Configuration and credential handling
+# Why configuration and credentials are separate
 
-Use this design when implementing profile resolution or deciding how automation supplies a Drift admin key.
+Use this explanation when evaluating a new configuration source or credential-storage feature. Drift CLI separates reusable operator preferences from bearer secrets so convenience does not weaken the tenant boundary.
 
-The configuration file stores non-secret operator preferences. The first release will not persist raw Drift credentials.
+## Profiles describe access, not identity
 
-## Configuration
+A profile names a Drift endpoint and the environment variable from which a credential can be read. It may make an operator's intent easier to recognize, but it does not select a tenant on the server.
 
-Platform-standard configuration directories come from the Rust `directories` crate. An explicit `--config` path and `DRIFT_CONFIG` environment variable make automation and tests deterministic.
+The bearer key remains the authentication and tenant context. Renaming a profile, changing a profile's endpoint, or supplying a tenant-like label cannot change the tenant encoded by that key.
 
-```toml
-default_profile = "local"
-output = "human"
+## Configuration stays non-secret
 
-[profiles.local]
-endpoint = "http://localhost:3000"
-credential_env = "DRIFT_LOCAL_ADMIN_KEY"
-```
+Configuration files are useful because they can be reviewed, backed up, and shared as operational setup. Storing raw bearer keys in the same files would turn those ordinary workflows into secret-distribution paths.
 
-`credential_env` names an environment variable; it is not the credential itself. Profiles label an endpoint and credential source for operator convenience, but they do not select a tenant on the server. The supplied key still determines the tenant.
+Drift CLI therefore stores endpoints, output preferences, profile names, and credential-variable names only. Raw credentials come from an explicit standard-input flow or an environment variable.
 
-## Resolution precedence
+The [configuration reference](../reference/configuration.md) defines the accepted fields and precedence. The [environment reference](../reference/environment.md) defines credential resolution.
 
-Non-secret values resolve in this order:
+## Explicit sources prevent accidental fallback
 
-1. explicit command-line option;
-2. direct environment override (`DRIFT_ENDPOINT`, `DRIFT_OUTPUT`, or `DRIFT_PROFILE`);
-3. selected profile;
-4. top-level config value;
-5. safe default where one exists.
+Configuration precedence favors the most deliberate source: command-line selections override environment settings, which override profiles and defaults. Credential resolution is narrower and treats empty values as errors.
 
-The endpoint default is `http://localhost:3000`, and output defaults to `human`. Configuration errors fail before any HTTP request and identify the source without printing secret values.
+This asymmetry is intentional. Falling through from an empty or misnamed secret source to another credential could run an administrative command against the wrong tenant while appearing successful.
 
-Credential resolution is intentionally narrower:
+## Why there is no secret argument
 
-1. standard input when `--key-stdin` is explicitly selected;
-2. `DRIFT_API_KEY` when set;
-3. the environment variable named by the selected profile's `credential_env`;
-4. otherwise fail with guidance.
+A secret-valued command-line option would be convenient but unsafe on systems that retain shell history or expose process arguments. `--key-stdin` provides an explicit short-lived alternative without placing the bearer key in the command itself.
 
-There is no secret-bearing command-line option and no plaintext `api_key` configuration field. Standard input trims one trailing line ending but must not otherwise rewrite a key.
+## Why keychain support is deferred
 
-## Future credential stores
+Native credential stores could improve interactive use, but they introduce platform, headless-environment, deletion, profile-renaming, and fallback semantics. An incomplete design could silently persist secrets in plaintext or behave differently in automation.
 
-Native OS keychain support may be proposed after the environment/stdin workflow is validated. It must be opt-in, identify portability and headless-server behavior, define deletion and profile-renaming semantics, and avoid silently falling back to plaintext files.
+Any future keychain integration must be opt-in, define those behaviors across supported platforms, and preserve environment and standard-input workflows for CI and servers.
 
-## Secret-safe implementation rules
+## Consequences for automation
 
-- Wrap credentials with `secrecy::SecretString` and expose them only at the authorization-header boundary.
-- Do not derive or implement `Debug`, `Display`, serialization, cloning, or equality for application secret wrappers unless required and reviewed.
-- Redact the `Authorization` header from HTTP traces and error context.
-- Parse error bodies into a DTO that does not retain the outgoing request headers.
-- One-time secrets from create/rotate may appear in successful human or JSON output. They must not appear in errors, retries, telemetry, or test failure diffs.
-- Do not automatically retry non-idempotent create, revoke, rotate, or restore operations.
+Automation may choose profiles, set non-secret endpoints, inject environment variables, or pipe a credential through standard input. It must not infer tenant ownership, credential scope, rotation timing, or whether a secret is safe to persist.
+
+One-time secrets may appear only in successful create and rotate results. Errors, retries, diagnostics, and configuration files must remain secret-free.
